@@ -5,16 +5,23 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <!--Import materialize.css-->
+      <link type="text/css" rel="stylesheet" href="/materialize/css/materialize.css"  media="screen,projection"/>
+      <link type="text/css" rel="stylesheet" href="/materialize.min.css"  media="screen,projection"/>
+
 </head>
 <body>
- <form action="salvarpessoa" method="post">
+ <form action="salvarpessoa" method="post" th:object="${pessoaObj}">
+    <label>ID</label>
+   <input name="id" th:field="*{id}">
   <label>Nome</label>
-  <input name="nome">
+  <input name="nome" th:field="*{nome}">
    <label>Sobrenome</label>
-  <input name="sobrenome">
+  <input name="sobrenome"  th:field="*{sobrenome}">
  
     
-  <input type="submit" value="Salvar">
+  <input   class="btn waves-effect waves-light" type="submit"  value="Salvar" >
  </form>
  
  <a href="/listapessoas">lista </a>
@@ -24,13 +31,16 @@
 <td th:text="${pessoa.id}"> </td>
 <td th:text="${pessoa.nome}"> </td>
 <td th:text="${pessoa.sobrenome}"> </td>
-
+<td><a th:href="@{/editarpessoa/{idpessoa}(idpessoa=${pessoa.id})}">Editar</a> </td>
+<td><a th:href="@{/removerpessoa/{idpessoa}(idpessoa=${pessoa.id})}">excluir</a> </td>
 
 
 </tr>
 
 </table>
  
+       <script type="text/javascript" src="materialize/js/materialize.jss"></script>
+        <script type="text/javascript" src="materialize/js/materialize.min.jss"></script>
  
 </body>
 </html>
