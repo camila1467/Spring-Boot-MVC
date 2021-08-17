@@ -1,11 +1,14 @@
 package curso.springboot.model;
 
 import java.io.Serializable;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Pessoa implements Serializable {
@@ -19,11 +22,26 @@ public class Pessoa implements Serializable {
 	private String nome;
 
 	private String sobrenome;
+	@OneToMany(mappedBy="pessoa" ,orphanRemoval = true,cascade= CascadeType.ALL)
+	private List<Telefone>telefones;
 	
-
 	public Long getId() {
 		return id;
 	}
+	
+	
+
+	public List<Telefone> getTelefones() {
+		return telefones;
+	}
+
+
+
+	public void setTelefones(List<Telefone> telefones) {
+		this.telefones = telefones;
+	}
+
+
 
 	public void setId(Long id) {
 		this.id = id;

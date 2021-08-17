@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+
+<html  xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <!--Import materialize.css-->
+      <link type="text/css" rel="stylesheet" href="/materialize/css/materialize.css"  media="screen,projection"/>
+      <link type="text/css" rel="stylesheet" href="/materialize.min.css"  media="screen,projection"/>
+
+</head>
+
+<body>
+<h5>Cadastro de pessoas</h5>
+
+<a class="waves-effect waves-light btn" href="/cadastropessoa">Cad. Pessoa</a>
+ <div th:each="p : ${pessoaObj}">
+     <div class="row">
+       <p>ID: <span th:text="${p.id}"></span></p>
+       <p>Nome: <span th:text="${p.nome}"></span></p>
+       <p>Sobrenome: <span th:text="${p.sobrenome}"></span></p>
+     </div>
+ </div>
+<h5>Telefones</h5>
+ <div class="row">
+   <form th:action="@{/addfonePessoa/{pessoaid}(pessoaid=${pessoaObj.id})}"
+    method="post" class="col s12">
+    <div class="row">
+    	<div class="input-field col s6">
+    	  <label class="active" for="numero">Número:</label>
+    	  <input id="numero" name="numero" class="validate">
+    	</div>
+    	
+    	<div class="input-field col s6">
+    	  <label class="active" for="tipo">Tipo:</label>
+    	  <input id="tipo" name="tipo" class="validate">
+    	</div>
+    	
+    	<input type="submit" value="Adicionar"  class="waves-effect waves-light btn">
+    </div>
+   </form>
+ </div>
+ 
+
+ <table class="striped">
+  <thead>
+    <tr>
+     
+     <th>Número</th>
+     <th>Tipo</th>
+  
+
+    </tr>
+  </thead>
+
+<tr th:each="fone : ${telefones}"> 
+<td th:text="${fone.numero}"> </td>
+<td th:text="${fone.tipo}"> </td>
+ 
+ <td><a th:href="@{/removertelefone/{idtelefone}(idtelefone=${fone.id})}">excluir</a> </td>
+ 
+ </tr></table>
+ 
+       <script type="text/javascript" src="materialize/js/materialize.jss"></script>
+        <script type="text/javascript" src="materialize/js/materialize.min.jss"></script>
+ 
+</body>
+</html>
