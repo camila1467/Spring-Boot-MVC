@@ -1,8 +1,11 @@
 package curso.springboot.controller;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -33,7 +36,10 @@ public class PessoaController {
 	}
 	
 	@RequestMapping(method=RequestMethod.POST, value="**/salvarpessoa")
-	public ModelAndView salvar(Pessoa pessoa) {
+	public ModelAndView salvar(@Valid Pessoa pessoa, BindingResult bindingresult) {
+		if (bindingresult.hasErrors())
+		
+		
 		pessoaRepository.save(pessoa);
 		ModelAndView andView = new ModelAndView ("cadastro/cadastropessoa");
 	Iterable<Pessoa>pessoaIt= pessoaRepository.findAll();
