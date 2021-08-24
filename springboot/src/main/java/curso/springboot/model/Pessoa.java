@@ -20,10 +20,10 @@ public class Pessoa implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-@NotNull(message="Nome não pdoe ser nulo")
+@NotNull(message="Nome não pode ser nulo")
 @NotEmpty(message="Nome não pode ser vazio")
 	private String nome;
-@NotNull(message="Sobrenome não pdoe ser nulo")
+@NotNull(message="Sobrenome não pode ser nulo")
 @NotEmpty(message="Sobrenome não pode ser vazio")
 	private String sobrenome;
 	@OneToMany(mappedBy="pessoa" ,orphanRemoval = true,cascade= CascadeType.ALL)
