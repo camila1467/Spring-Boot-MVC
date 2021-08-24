@@ -9,7 +9,15 @@
       <!--Import materialize.css-->
       <link type="text/css" rel="stylesheet" href="/materialize/css/materialize.css"  media="screen,projection"/>
       <link type="text/css" rel="stylesheet" href="/materialize.min.css"  media="screen,projection"/>
+<style type="text/css">
+table.striped>tbody>tr:nth-child(odd) {
+	background-color: rgba(158, 154, 154, 0.5);
+}
 
+form input[type=submit] {
+ color: white;
+}
+</style>
 </head>
 
 <body>
@@ -25,8 +33,17 @@
  </div>
 <h5>Telefones</h5>
  <div class="row">
+ <br/>
+<div th:each="m : ${msg}">
+
+<span th:text = "${m}"></span>
+
+</div>
+
+
+<br/>
    <form th:action="@{/addfonePessoa/{pessoaid}(pessoaid=${pessoaObj.id})}"
-    method="post" class="col s12">
+    method="post" class="col s12" onsubmit ="return validarCampos()? true : false">
     <div class="row">
     	<div class="input-field col s6">
     	  <label class="active" for="numero">Número:</label>
@@ -63,8 +80,26 @@
  
  </tr></table>
  
-       <script type="text/javascript" src="materialize/js/materialize.jss"></script>
-        <script type="text/javascript" src="materialize/js/materialize.min.jss"></script>
  
+ <script type="text/javascript" src="/materialize/js/materialize.js"></script>
+ <script type="text/javascript" src="/materialize/js/materialize.min.js"></script>
+ 
+ <script type="text/javascript">
+  function validarCampos(){
+	  numero = document.getElementById('numero').value;
+	  tipo = document.getElementById('tipo').value;
+	  
+	  if (numero === ''){
+		  alert('Numero deve ser informado');
+		  return false;
+	  }
+	  else if (tipo === '') {
+		  alert('Tipo deve ser informado');
+		  return false;
+	  }
+	  
+	  return true;
+  }
+ </script>
 </body>
 </html>

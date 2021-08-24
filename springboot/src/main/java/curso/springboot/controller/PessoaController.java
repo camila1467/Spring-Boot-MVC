@@ -119,6 +119,29 @@ return modelandView;
 public ModelAndView addFonePessoa( Telefone telefone ,@PathVariable("pessoaid")Long pessoaid) {
 	
 	Pessoa pessoa = pessoaRepository.findById(pessoaid).get();
+	
+	if( telefone!=null&& telefone.getNumero()!= null && telefone.getNumero().isEmpty() || telefone.getNumero()==null) {
+		ModelAndView modelandView = new ModelAndView ("cadastro/telefones");
+		modelandView.addObject("pessoaObj",pessoa);
+
+		modelandView.addObject("telefones",telefoneRepository.getTelefones(pessoaid));
+		List<String> msg= new ArrayList<String>();
+	if(telefone.getNumero().isEmpty()) {
+		
+		msg.add("Numero deve ser informado");
+	modelandView.addObject("msg", msg);
+
+	}
+	
+	else if(telefone.getTipo().isEmpty()) {
+		msg.add("tipo deve ser informado");
+	}modelandView.addObject("msg", msg);
+	
+	return modelandView;
+
+	}
+	
+	
 	telefone.setPessoa(pessoa);
 	telefoneRepository.save(telefone);
 	ModelAndView modelandView = new ModelAndView ("cadastro/telefones");
