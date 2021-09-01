@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 
-<html  xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html  xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
 <meta charset="UTF-8">
@@ -56,6 +57,12 @@ form input[type=submit] {
 						th:field="*{sobrenome}" id="sobrenome">
 				</div>
 			</div>
+			<div class="row" sec:authorize="hasAnyRole('ROLE_ADMIN')">
+				<div class="input-field col s12">
+					<label for="idade" class="active">Idade</label> 
+					<input name="idade" th:field="*{idade}" id="idade" class="validate">
+				</div>
+			</div>
 			
 			
   <div class="row">
@@ -96,7 +103,7 @@ form input[type=submit] {
      <th>ID</th>
      <th>Nome</th>
      <th>Sobrenome</th>
-  
+  <th>Idade</th>
      <th>Editar</th>
      <th>Ecluir</th>
     </tr>
@@ -106,6 +113,8 @@ form input[type=submit] {
 <td th:text="${pessoa.id}"> </td>
    <td><a th:href="@{/telefones/{idpessoa}(idpessoa=${pessoa.id})}"><span th:text = "${pessoa.nome}"></span></a></td>
 <td th:text="${pessoa.sobrenome}"> </td>
+   <td th:text = "${pessoa.idade}"></td>
+
 <td><a th:href="@{/editarpessoa/{idpessoa}(idpessoa=${pessoa.id})}">Editar</a> </td>
 <td><a th:href="@{/removerpessoa/{idpessoa}(idpessoa=${pessoa.id})}">excluir</a> </td>
 

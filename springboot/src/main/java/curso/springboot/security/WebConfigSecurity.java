@@ -30,7 +30,8 @@ public class WebConfigSecurity extends WebSecurityConfigurerAdapter {
 		http.csrf()
 		.disable()//desativa as configuracoes padrao de momeria do spring
 		.authorizeRequests()//permitir restringir acessos
-		.antMatchers(HttpMethod.GET ,"/").permitAll()//permiti qualquer usuario acessar a pagina index
+		.antMatchers(HttpMethod.GET ,"/").permitAll()
+		.antMatchers(HttpMethod.GET ,"/cadastropessoa").hasAnyRole("ADMIN")//permiti qualquer usuario acessar a pagina index
 	.anyRequest().authenticated()
 	.and().formLogin().permitAll()//permite qualquer usuario
 	.and().logout()//mapeia url de logout e valida usuario autenticado
@@ -42,13 +43,13 @@ public class WebConfigSecurity extends WebSecurityConfigurerAdapter {
 	@Override//cria autenticacao do usuario com banco de dados ou em memoria
 	protected void configure (AuthenticationManagerBuilder auth)throws Exception
 	{
-		auth.userDetailsService(impementacaoUserdetailsService).passwordEncoder(new BCryptPasswordEncoder());
+		//auth.userDetailsService(impementacaoUserdetailsService).passwordEncoder(new BCryptPasswordEncoder());
 		
 		
-		/*auth.inMemoryAuthentication().passwordEncoder(new BCryptPasswordEncoder())
+		auth.inMemoryAuthentication().passwordEncoder(new BCryptPasswordEncoder())
 		.withUser("camila")
-		.password("$2a$10$E5jc.7w9H8JwIs6N5noGK.OIGwbIo2gQxXItHs7NpLCwL3Aedzit2")
-		.roles("ADMIN");*/
+		.password("$2a$10$7W.COCxv/B7GJyEgsk2Kuur/uqAIWxOmSGD5QY44fnjrNPkNrRAha")
+		.roles("ADMIN");
 		
 	}
 	@Override//

@@ -26,6 +26,7 @@ public class Pessoa implements Serializable {
 @NotNull(message="Sobrenome não pode ser nulo")
 @NotEmpty(message="Sobrenome não pode ser vazio")
 	private String sobrenome;
+private String idade;
 	@OneToMany(mappedBy="pessoa" ,orphanRemoval = true,cascade= CascadeType.ALL)
 	private List<Telefone>telefones;
 	
@@ -65,6 +66,18 @@ public class Pessoa implements Serializable {
 
 	public void setSobrenome(String sobrenome) {
 		this.sobrenome = sobrenome;
+	}
+
+
+
+	public String getIdade() {
+		return idade;
+	}
+
+
+
+	public void setIdade(String idade) {
+		this.idade = idade;
 	}
 
 
