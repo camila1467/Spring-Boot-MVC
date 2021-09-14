@@ -34,7 +34,12 @@ public class WebConfigSecurity extends WebSecurityConfigurerAdapter {
 		.antMatchers(HttpMethod.GET ,"/cadastropessoa").hasAnyRole("ADMIN")//permiti qualquer usuario acessar a pagina index
 	.anyRequest().authenticated()
 	.and().formLogin().permitAll()//permite qualquer usuario
-	.and().logout()//mapeia url de logout e valida usuario autenticado
+	.loginPage("/login")
+	.defaultSuccessUrl("/cadastropessoa")
+	.failureUrl("/login?error=true")
+	.and()
+	.logout().logoutSuccessUrl("/login")//mapeia url de logout e valida usuario autenticado
+	
 	.logoutRequestMatcher(new AntPathRequestMatcher("/logout"));
 		
 		
